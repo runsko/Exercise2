@@ -30,6 +30,7 @@ func incrementing(add_number chan<-int, finished chan<- bool) {
 		add_number <- 1
 	}
 	//TODO: signal that the goroutine is finished
+	finished <- true
 }
 
 func decrementing(add_number chan<- int, finished chan<- bool) {
@@ -37,15 +38,19 @@ func decrementing(add_number chan<- int, finished chan<- bool) {
 		add_number <- -1
 	}
 	//TODO: signal that the goroutine is finished
+	finished <- true
 }
 
 func main() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
-
 	// TODO: Construct the required channels
-	// Think about wether the receptions of the number should be unbuffered, or buffered with a fixed queue size.
+	// Think about wether the receptions of the number should be unbuffered, or buffered with a fixed queue size
+	increment_finished := make(chan bool)
+	decrement_finished := make(chan bool)
+	
 
 	// TODO: Spawn the required goroutines
+	
 
 	// TODO: block on finished from both "worker" goroutines
 
